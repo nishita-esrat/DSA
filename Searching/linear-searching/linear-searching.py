@@ -5,10 +5,11 @@ target = 6;
 
 def linear_searching(arr,target):
  for index,item in enumerate(arr):
-  if item == target:
+   if item == target:
     return f"{target} founded index on {index}"
  return "not founded"
  
 print(linear_searching(arr,target))
+
 
 

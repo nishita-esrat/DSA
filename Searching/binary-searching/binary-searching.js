@@ -1,10 +1,10 @@
 // ascending order
 let arrAscendingOrder = [1, 2, 3, 5, 8, 9, 10];
-let target = 9;
+let target = 8;
 
 function binarySearchingAscendingOrder(arrAscendingOrder, target) {
   let start = 0;
-  let end = arrAscendingOrder.length;
+  let end = arrAscendingOrder.length - 1;
 
   while (start <= end) {
     let mid = Math.floor((start + end) / 2);
@@ -27,7 +27,7 @@ let arrDescendingOrder = [10, 9, 8, 5, 3, 2, 1];
 
 function binarySearchingDescendingOrder(arrDescendingOrder, target) {
   let start = 0;
-  let end = arrDescendingOrder.length;
+  let end = arrDescendingOrder.length - 1;
 
   while (start <= end) {
     let mid = Math.floor((start + end) / 2);
@@ -48,7 +48,7 @@ console.log(binarySearchingDescendingOrder(arrDescendingOrder, target));
 
 function orderAgnosticBinarySearching(arr, target) {
   let start = 0;
-  let end = arr.length;
+  let end = arr.length - 1;
   let isAscending = arr[0] < arr[arr.length - 1];
 
   while (start <= end) {
@@ -74,4 +74,4 @@ function orderAgnosticBinarySearching(arr, target) {
   return "not founded";
 }
 
-console.log(orderAgnosticBinarySearching(arrDescendingOrder,target))
+console.log(orderAgnosticBinarySearching(arrDescendingOrder, target));
