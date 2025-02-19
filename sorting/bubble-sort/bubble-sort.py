@@ -5,10 +5,11 @@ def bubble_sorting(list):
   
   for i in range(len(list)):
 
-    for j in range(i,len(list)):
+    for j in range(0,len(list)-1-i):
       
-      if list[i] > list[j]:
-       list[i],list[j] = list[j],list[i]
+      if list[j] > list[j+1]:
+       list[j],list[j+1] = list[j+1],list[j]
+
   return list
   
 bubble_sorting(list)
