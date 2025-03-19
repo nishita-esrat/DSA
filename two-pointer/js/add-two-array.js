@@ -1,14 +1,12 @@
-
-
-const arr1 = [1, 1, 2, 3, 4, 5];
-const arr2 = [1, 1, 1, 2, 2, 3, 5];
+const arr1 = [1, 1, 2, 3, 4, 5, 11];
+const arr2 = [1, 1, 1, 2, 2, 3, 5, 10];
 
 function addTwoArrayTwoPointerAlgo(arr1, arr2) {
   let start = 0;
   let end = 0;
   let newArr = [];
 
-  while (end <= arr2.length - 1) {
+  while (start < arr1.length && end < arr2.length) {
     if (arr1[start] <= arr2[end]) {
       newArr.push(arr1[start]);
       start++;
@@ -18,10 +16,14 @@ function addTwoArrayTwoPointerAlgo(arr1, arr2) {
     }
   }
 
-  if (start <= arr1.length - 1) {
-    for (let i = start; i < arr1.length; i++) {
-      newArr.push(arr1[i]);
-    }
+  while (start < arr1.length) {
+    newArr.push(arr1[start]);
+    start++;
+  }
+
+  while (end < arr2.length) {
+    newArr.push(arr2[end]);
+    end++;
   }
 
   return newArr;
