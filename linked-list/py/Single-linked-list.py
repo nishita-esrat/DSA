@@ -82,7 +82,30 @@ class Single_linked_list:
      
       node = self.find_node(index)
       node.val = val
-    
+
+
+    def delete_value(self,index):
+        if index < 1 or index > self.len:
+           print("index is out of range")
+           return
+        
+        if index == 1:
+          self.head = self.head.next
+          self.len -= 1
+          if self.len == 0:
+            self.tail = None
+          return
+
+        previous_node = self.find_node(index-1)
+
+        if index == self.len:
+          self.tail = previous_node
+          self.tail.next = None
+        else:
+           previous_node.next = previous_node.next.next
+
+        self.len -= 1
+   
 
     def print_list(self):
        node = self.head
@@ -105,6 +128,7 @@ my_list.append_at_position(1,1)
 my_list.append_at_position(25,5)
 my_list.append_at_position(15,4)
 my_list.update_value(1555,4)
+my_list.delete_value(4)
 my_list.print_list()
 print("head",my_list.head.val)
 print("tail",my_list.tail.val)
