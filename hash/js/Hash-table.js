@@ -55,3 +55,4 @@ console.log(myHashTable.set(10));
 console.log(myHashTable.set("auu"));
 console.log(myHashTable.get("gg"));
 console.log(myHashTable.display());
+console.log(myHashTable.hashTable)
