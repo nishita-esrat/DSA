@@ -1,8 +1,7 @@
 // Given a string s consisting of lowercase English letters, return the first letter to appear twice.
 
 function hashTableLeetCode2351(str) {
-
-
+  
   const letters = {
     a: 0,
     b: 0,
@@ -38,9 +37,8 @@ function hashTableLeetCode2351(str) {
     if (letters[str[index]] > 1) {
       return str[index];
     }
-
   }
+  
 }
 
-
-console.log(hashTableLeetCode2351("abcdd"))
+console.log(hashTableLeetCode2351("abcdd"));
