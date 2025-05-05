@@ -1,3 +1,5 @@
+
+
 // Array traverse
 
 let arr = [10, 20, 30, 40, 50];
@@ -10,8 +12,10 @@ function arrayTraverse(arr, index) {
   console.log(arr[index]);
   arrayTraverse(arr, index + 1);
 }
+console.log(arrayTraverse(arr, 0));
 
-// console.log(arrayTraverse(arr, 0));
+
+
 
 // Reverse array
 
@@ -27,8 +31,10 @@ function arrayReverse(arr, forwardIndex, backwardIndex) {
 
   return arr;
 }
+console.log(arrayReverse(arr, 0, arr.length - 1));
 
-// console.log(arrayReverse(arr, 0, arr.length - 1));
+
+
 
 // Palindrome
 
@@ -45,5 +51,4 @@ function isPalindrome(str, forwardIndex, backwardIndex) {
 
   return isPalindrome(str, forwardIndex + 1, backwardIndex - 1);
 }
-
 console.log(isPalindrome(str, 0, str.length - 1));
