@@ -3,8 +3,9 @@
 
 
 function hashTableLeetCode2309(str) {
-    
+
   const letters = {};
+  
   for (let i = 97; i <= 122; i++) {
     const ch = String.fromCharCode(i); 
     letters[ch] = { lower: 0, upper: 0 };
