@@ -40,7 +40,7 @@ class BTS {
 
     while (node) {
       if (node.value === target) {
-        console.log(`${target} is found`)
+        console.log(`${target} is found`);
         return `${target} is found`;
       }
 
@@ -60,6 +60,23 @@ class BTS {
     }
   }
 
+  BFS() {
+    const arr = [this.root];
+
+    while (arr.length != 0) {
+
+      let currentNode = arr.shift();
+      console.log(currentNode.value);
+
+      if (currentNode.left) {
+        arr.push(currentNode.left);
+      }
+
+      if (currentNode.right) {
+        arr.push(currentNode.right);
+      }
+    }
+  }
 }
 
 const bts = new BTS(10);
@@ -67,7 +84,8 @@ bts.insert(9);
 bts.insert(11);
 bts.insert(8);
 bts.insert(12);
-bts.search(1)
-console.log(bts.search(1))
+bts.search(1);
+console.log(bts.search(1));
+bts.BFS()
 
 console.log(bts);
