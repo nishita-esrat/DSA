@@ -64,7 +64,6 @@ class BTS {
     const arr = [this.root];
 
     while (arr.length != 0) {
-
       let currentNode = arr.shift();
       console.log(currentNode.value);
 
@@ -77,6 +76,34 @@ class BTS {
       }
     }
   }
+
+  DFSInOrderTree(node) {
+    if (!node) {
+      return;
+    }
+    this.DFSInOrderTree(node.left);
+    console.log(node.value);
+    this.DFSInOrderTree(node.right);
+  }
+
+  DFSPreOrderTree(node) {
+    if (!node) {
+      return;
+    }
+    console.log(node.value);
+    this.DFSPreOrderTree(node.left);
+    this.DFSPreOrderTree(node.right);
+  }
+
+  DFSPostOrderTree(node) {
+    if (!node) {
+      return;
+    }
+
+    this.DFSPostOrderTree(node.left);
+    this.DFSPostOrderTree(node.right);
+    console.log(node.value);
+  }
 }
 
 const bts = new BTS(10);
@@ -86,6 +113,9 @@ bts.insert(8);
 bts.insert(12);
 bts.search(1);
 console.log(bts.search(1));
-bts.BFS()
+bts.BFS();
+bts.DFSInOrderTree(bts.root);
+bts.DFSPreOrderTree(bts.root);
+bts.DFSPostOrderTree(bts.root);
 
 console.log(bts);
