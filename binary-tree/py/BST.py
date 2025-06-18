@@ -100,30 +100,55 @@ class BST:
      self.DFS_post_order_tree(node.left)
      self.DFS_post_order_tree(node.right)
      print(node.val)
-     
 
-     
-     
+   def predessor(self,root):
+    node = root.left
+
+    while True:
+      if node.right is None:
+        print(node.val)
+        break
+
+      node = node.right
+
+   def successor(self,root):
+    node = root.right
+
+    while True:
+      if node.left is None:
+        print(node.val)
+        break
+
+      node = node.left
+
+   def is_valid_bst(self,node = None , minimum=float('-inf'), maximum=float('inf')):
+    if node is None:
+      return True
     
-
-   
+    if node.val < minimum or node.val > maximum:
+      return False
+    
+    return (
+        self.is_valid_bst(node.left, minimum, node.val) and
+        self.is_valid_bst(node.right, node.val, maximum)
+    )
      
-
-     
-
-          
+         
 
 
 bst = BST()
 bst.insert(10)
 bst.insert(9)
 bst.insert(11)
-bst.insert(8)
+bst.insert(20)
 bst.insert(12)
+bst.predessor(bst.root)
+bst.successor(bst.root)
+print(bst.is_valid_bst(bst.root))
 # bst.BFS()
-print(bst.search(42))
+# print(bst.search(42))
 # bst.DFS_in_order_tree(bst.root)
 # bst.DFS_pre_order_tree(bst.root)
-bst.DFS_post_order_tree(bst.root)
+# bst.DFS_post_order_tree(bst.root)
 
 
