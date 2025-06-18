@@ -40,7 +40,6 @@ class BTS {
 
     while (node) {
       if (node.value === target) {
-        console.log(`${target} is found`);
         return `${target} is found`;
       }
 
@@ -104,6 +103,50 @@ class BTS {
     this.DFSPostOrderTree(node.right);
     console.log(node.value);
   }
+
+  isValidBST(node = null, minimum = -Infinity, maximum = Infinity) {
+    if (!node) {
+      return true;
+    }
+
+    if (node.value < minimum || node.value > maximum) {
+      return false;
+    }
+
+    return (
+      this.isValidBST(
+        node.left,
+        (minimum = -Infinity),
+        (maximum = node.value)
+      ) &&
+      this.isValidBST(node.right, (minimum = node.value), (maximum = Infinity))
+    );
+  }
+
+  predessor(root) {
+    let node = root.left;
+
+    while (true) {
+      if (!node.right) {
+        console.log(node.value);
+        break;
+      }
+
+      node = node.right;
+    }
+  }
+
+  successor(root) {
+    let node = root.right;
+
+    while (true) {
+      if (!node.left) {
+        console.log(node.value);
+        break;
+      }
+      node = node.left;
+    }
+  }
 }
 
 const bts = new BTS(10);
@@ -112,6 +155,9 @@ bts.insert(11);
 bts.insert(8);
 bts.insert(12);
 bts.search(1);
+console.log(bts.isValidBST(bts.root))
+bts.predessor(bts.root);
+bts.successor(bts.root);
 console.log(bts.search(1));
 bts.BFS();
 bts.DFSInOrderTree(bts.root);
