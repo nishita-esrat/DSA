@@ -44,6 +44,37 @@ class Graph {
         }
       }
     }
+
+    this.resetVisited();
+  }
+
+  DFSTraverse(src) {
+    this.visited[src] = true;
+    console.log(src);
+    let arr = this.graph[src];
+    for (let i = 0; i < arr.length; i++) {
+      if (!this.visited[arr[i]]) {
+        this.DFSTraverse(arr[i]);
+      }
+    }
+  }
+
+  resetVisited() {
+    for (let node in this.visited) {
+      this.visited[node] = false;
+    }
+  }
+
+  cycleDetection(src) {
+    this.parents[src] = null;
+    let arr = this.graph[src];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!this.visited[arr[i]]) {
+        this.visited[arr[i]] = true;
+        this.parents[arr[i]] = src;
+      }
+    }
   }
 }
 
@@ -54,4 +85,6 @@ gp.add(1, 5);
 gp.add(2, 3);
 gp.add(1, 6);
 gp.BFSTraverse(3);
+gp.DFSTraverse(3);
+gp.resetVisited();
 console.log(gp);
