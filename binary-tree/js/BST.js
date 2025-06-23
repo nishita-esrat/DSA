@@ -114,12 +114,8 @@ class BTS {
     }
 
     return (
-      this.isValidBST(
-        node.left,
-        (minimum = -Infinity),
-        (maximum = node.value)
-      ) &&
-      this.isValidBST(node.right, (minimum = node.value), (maximum = Infinity))
+      this.isValidBST(node.left, minimum, node.value) &&
+      this.isValidBST(node.right, node.value, maximum)
     );
   }
 
@@ -155,7 +151,7 @@ bts.insert(11);
 bts.insert(8);
 bts.insert(12);
 bts.search(1);
-console.log(bts.isValidBST(bts.root))
+console.log(bts.isValidBST(bts.root));
 bts.predessor(bts.root);
 bts.successor(bts.root);
 console.log(bts.search(1));
