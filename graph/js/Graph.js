@@ -65,26 +65,49 @@ class Graph {
     }
   }
 
-  cycleDetection(src) {
-    this.parents[src] = null;
-    let arr = this.graph[src];
+  resetParents() {
+    for (let node in this.parents) {
+      this.parents[node] = null;
+    }
+  }
 
-    for (let i = 0; i < arr.length; i++) {
-      if (!this.visited[arr[i]]) {
-        this.visited[arr[i]] = true;
-        this.parents[arr[i]] = src;
+  cycleDetectionBFS(src) {
+    this.visited[src] = true;
+    this.parents[src] = null;
+    const queue = [src];
+
+    while (queue.length != 0) {
+      const value = queue.shift();
+      const arr = this.graph[value];
+
+      for (let index = 0; index < arr.length; index++) {
+        if (!this.visited[arr[index]]) {
+          this.visited[arr[index]] = true;
+          this.parents[arr[index]] = value;
+          queue.push(arr[index]);
+        } else if (this.parents[value] != arr[index]) {
+          return "cycle detect";
+        }
       }
     }
+
+    this.resetParents();
+    this.resetVisited();
+
+    return "can't detect cycle";
   }
 }
 
 const gp = new Graph();
+gp.add(0, 1);
 gp.add(1, 2);
 gp.add(1, 3);
-gp.add(1, 5);
-gp.add(2, 3);
-gp.add(1, 6);
-gp.BFSTraverse(3);
-gp.DFSTraverse(3);
-gp.resetVisited();
+gp.add(3, 4);
+gp.add(4, 5);
+gp.add(5, 6);
+// gp.add(6, 3);
+// gp.BFSTraverse(3);
+// gp.DFSTraverse(3);
+// gp.resetVisited();
+console.log(gp.cycleDetectionBFS(0));
 console.log(gp);
