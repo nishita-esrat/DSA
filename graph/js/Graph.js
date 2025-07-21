@@ -97,10 +97,10 @@ class Graph {
     return "can't detect cycle";
   }
 
-  shortestPathAlgoBFS(src, source, destination) {
-    const queue = [src];
-    this.visited[src] = true;
-    this.parents[src] = null;
+  shortestPathAlgoBFS(source, destination) {
+    const queue = [source];
+    this.visited[source] = true;
+    this.parents[source] = null;
 
     while (queue.length != 0) {
       const value = queue.shift();
@@ -128,22 +128,57 @@ class Graph {
 
     path.reverse();
     console.log("Path:", path.join(" -> "));
+    this.resetVisited();
+    this.resetParents();
+  }
+
+  bipartiteAlgoBFS(src, color1, color2) {
+    const queue = [src];
+    const color = {};
+    this.visited[src] = true;
+    color[src] = color1;
+
+    while (queue.length != 0) {
+      const value = queue.shift();
+      const arr = this.graph[value];
+
+      for (let node of arr) {
+        if (!this.visited[node]) {
+          color[node] = color[value] === color1 ? color2 : color1;
+          this.visited[node] = true;
+          queue.push(node);
+        } else if (color[value] === color[node]) {
+          this.resetVisited();
+          return "Graph is NOT bipartite";
+        }
+      }
+    }
+    this.resetVisited();
+    return "Graph is  bipartite";
   }
 }
 
 const gp = new Graph();
 gp.add(0, 1);
 gp.add(1, 2);
-gp.add(1, 3);
+gp.add(1, 6);
+gp.add(2, 3);
 gp.add(3, 4);
-gp.add(4, 5);
-gp.add(5, 6);
+gp.add(3, 5);
+gp.add(7, 6);
+gp.add(7, 8);
+gp.add(9, 8);
+gp.add(9, 10);
+gp.add(10, 5);
 // gp.add(6, 3);
 // gp.BFSTraverse(3);
 // gp.DFSTraverse(3);
 // gp.resetVisited();
 // console.log(gp.cycleDetectionBFS(0));
 // console.log(gp)
-gp.shortestPathAlgoBFS(0, 4, 6);
+gp.shortestPathAlgoBFS(6, 5);
+console.log(gp.bipartiteAlgoBFS(0, "red", "green"));
 
 console.log(gp);
+
+
