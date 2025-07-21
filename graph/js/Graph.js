@@ -96,6 +96,39 @@ class Graph {
 
     return "can't detect cycle";
   }
+
+  shortestPathAlgoBFS(src, source, destination) {
+    const queue = [src];
+    this.visited[src] = true;
+    this.parents[src] = null;
+
+    while (queue.length != 0) {
+      const value = queue.shift();
+      const arr = this.graph[value];
+
+      for (let index = 0; index < arr.length; index++) {
+        if (!this.visited[arr[index]]) {
+          queue.push(arr[index]);
+          this.visited[arr[index]] = true;
+          this.parents[arr[index]] = value;
+        }
+      }
+    }
+
+    // Reconstruct path
+    const path = [destination];
+    while (path[path.length - 1] !== source) {
+      const parent = this.parents[path[path.length - 1]];
+      if (parent === null || parent === undefined) {
+        console.log("No path found.");
+        return;
+      }
+      path.push(parent);
+    }
+
+    path.reverse();
+    console.log("Path:", path.join(" -> "));
+  }
 }
 
 const gp = new Graph();
@@ -109,5 +142,8 @@ gp.add(5, 6);
 // gp.BFSTraverse(3);
 // gp.DFSTraverse(3);
 // gp.resetVisited();
-console.log(gp.cycleDetectionBFS(0));
+// console.log(gp.cycleDetectionBFS(0));
+// console.log(gp)
+gp.shortestPathAlgoBFS(0, 4, 6);
+
 console.log(gp);
