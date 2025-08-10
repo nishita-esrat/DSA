@@ -3,21 +3,23 @@ class Graph {
     this.graph = {};
     this.visited = {};
     this.parents = {};
+    this.stack = [];
   }
 
-  add(a, b) {
-    this.visited[a] = false;
-    this.visited[b] = false;
+  add(a, b, isDirected = false) {
+    // Always make sure nodes exist in graph
+    if (!this.graph[a]) this.graph[a] = [];
+    if (!this.graph[b]) this.graph[b] = [];
 
-    if (!this.graph[a]) {
-      this.graph[a] = [b];
-    } else {
-      this.graph[a].push(b);
-    }
+    // Initialize visited & parents for new nodes
+    if (!(a in this.visited)) this.visited[a] = false;
+    if (!(b in this.visited)) this.visited[b] = false;
+    if (!(a in this.parents)) this.parents[a] = null;
+    if (!(b in this.parents)) this.parents[b] = null;
 
-    if (!this.graph[b]) {
-      this.graph[b] = [a];
-    } else {
+    // Add the edge
+    this.graph[a].push(b);
+    if (!isDirected) {
       this.graph[b].push(a);
     }
   }
@@ -156,29 +158,40 @@ class Graph {
     this.resetVisited();
     return "Graph is  bipartite";
   }
+
+  topologySortingDFS(src) {
+    this.visited[src] = true;
+    let arr = this.graph[src];
+    for (let i = 0; i < arr.length; i++) {
+      if (!this.visited[arr[i]]) {
+        this.topologySortingDFS(arr[i]);
+      }
+    }
+    this.stack.push(src);
+  }
 }
 
 const gp = new Graph();
-gp.add(0, 1);
-gp.add(1, 2);
-gp.add(1, 6);
-gp.add(2, 3);
-gp.add(3, 4);
-gp.add(3, 5);
-gp.add(7, 6);
-gp.add(7, 8);
-gp.add(9, 8);
-gp.add(9, 10);
-gp.add(10, 5);
+gp.add(0, 1, true);
+gp.add(1, 2, true);
+gp.add(3, 2, true);
+gp.add(2, 4, true);
+gp.add(4, 5, true);
+gp.add(6, 5, true);
 // gp.add(6, 3);
 // gp.BFSTraverse(3);
 // gp.DFSTraverse(3);
 // gp.resetVisited();
 // console.log(gp.cycleDetectionBFS(0));
 // console.log(gp)
-gp.shortestPathAlgoBFS(6, 5);
-console.log(gp.bipartiteAlgoBFS(0, "red", "green"));
+// gp.shortestPathAlgoBFS(6, 5);
+// console.log(gp.bipartiteAlgoBFS(0, "red", "green"));
 
-console.log(gp);
+for (const node in gp.visited) {
+  if (!gp.visited[node]) {
+    gp.topologySortingDFS(node);
+  }
+}
 
-
+console.log(gp.stack.reverse().join("->"));
+gp.resetVisited();
