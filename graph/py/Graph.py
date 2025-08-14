@@ -28,9 +28,33 @@ class Graph:
         if not is_directed:
            self.graph[b].append(a)
 
+    def BFS_traverse(self,src):
+     self.visited[src] = True
+     queue = [src]
+
+     while queue:
+      val = queue.pop(0)
+      print(val)
+
+      for neighbor in self.graph[val]:
+         if not self.visited[neighbor]:
+          self.visited[neighbor] = True
+          queue.append(neighbor)
+        
+
 gp = Graph()
+gp.add_gp(0,1)
 gp.add_gp(1,2)
+gp.add_gp(1,7)
+gp.add_gp(2,3)
+gp.add_gp(3,4)
+gp.add_gp(4,5)
+gp.add_gp(5,6)
+gp.add_gp(6,7)
+
+
 print(gp.graph)
+gp.BFS_traverse(0)
    
 
     
