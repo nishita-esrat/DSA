@@ -49,6 +49,27 @@ class Graph:
        for neighbor in self.graph[src]:
          if not self.visited[neighbor]:
            self.DFS_traverse(neighbor)
+
+    def cycle_detection(self,src):
+        self.visited[src] = True
+        self.parents[src] = None
+        queue = [src]
+
+        while queue:
+          val = queue.pop(0)
+
+          for neighbor in self.graph[val]:
+             if not self.visited[neighbor]:
+               self.visited[neighbor] = True
+               self.parents[neighbor] = val
+               queue.append(neighbor)
+             elif(self.parents[val] != neighbor):
+               return "cycle detection"
+             
+        return "not found cycle"
+             
+            
+          
         
 
 gp = Graph()
@@ -64,7 +85,9 @@ gp.add_gp(6,7)
 
 print(gp.graph)
 # gp.BFS_traverse(0)
-gp.DFS_traverse(0)
+# gp.DFS_traverse(0)
+print(gp.visited)
+print(gp.cycle_detection(0))
    
 
     
