@@ -40,6 +40,15 @@ class Graph:
          if not self.visited[neighbor]:
           self.visited[neighbor] = True
           queue.append(neighbor)
+
+    def DFS_traverse(self,src):
+       
+       self.visited[src] = True
+       print(src)
+
+       for neighbor in self.graph[src]:
+         if not self.visited[neighbor]:
+           self.DFS_traverse(neighbor)
         
 
 gp = Graph()
@@ -54,7 +63,8 @@ gp.add_gp(6,7)
 
 
 print(gp.graph)
-gp.BFS_traverse(0)
+# gp.BFS_traverse(0)
+gp.DFS_traverse(0)
    
 
     
