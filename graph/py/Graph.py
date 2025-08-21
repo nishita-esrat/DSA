@@ -93,6 +93,14 @@ class Graph:
      actual_path = ">".join(map(str,path))
      return actual_path
 
+    def reset_parents(self):
+     for item in self.parents:
+        self.parents[item] = None
+
+    def reset_visited(self):
+     for node in self.visited:
+        self.visited[node] = False
+
              
             
           
@@ -116,6 +124,9 @@ gp.add_gp(6,7)
 # print(gp.cycle_detection(0))
 print(gp.shortest_path_BFS(1,4))
 print(gp.parents)
+gp.reset_parents()
+gp.reset_visited()
+print(gp.parents,gp.visited)
    
 
     
