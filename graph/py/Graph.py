@@ -67,6 +67,32 @@ class Graph:
                return "cycle detection"
              
         return "not found cycle"
+    
+    def shortest_path_BFS(self,source,destination):
+     self.visited[source] = True
+     self.parents[source] = None
+     queue = [source]
+
+     while queue:
+       val = queue.pop(0)
+
+       for neighbor in self.graph[val]:
+          if not self.visited[neighbor]:
+            self.visited[neighbor] = True
+            self.parents[neighbor] = val
+            queue.append(neighbor)
+
+     path = [destination]
+
+     while True:
+      path.append(self.parents[path[-1]])
+      if source == path[-1]:
+        break
+
+     path.reverse()
+     actual_path = ">".join(map(str,path))
+     return actual_path
+
              
             
           
@@ -83,11 +109,13 @@ gp.add_gp(5,6)
 gp.add_gp(6,7)
 
 
-print(gp.graph)
+# print(gp.graph)
 # gp.BFS_traverse(0)
 # gp.DFS_traverse(0)
-print(gp.visited)
-print(gp.cycle_detection(0))
+# print(gp.visited)
+# print(gp.cycle_detection(0))
+print(gp.shortest_path_BFS(1,4))
+print(gp.parents)
    
 
     
