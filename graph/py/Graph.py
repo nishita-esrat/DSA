@@ -28,7 +28,7 @@ class Graph:
         if not is_directed:
            self.graph[b].append(a)
 
-    def BFS_traverse(self,src):
+    def traverse_BFS(self,src):
      self.visited[src] = True
      queue = [src]
 
@@ -41,7 +41,7 @@ class Graph:
           self.visited[neighbor] = True
           queue.append(neighbor)
 
-    def DFS_traverse(self,src):
+    def traverse_DFS(self,src):
        
        self.visited[src] = True
        print(src)
@@ -101,6 +101,29 @@ class Graph:
      for node in self.visited:
         self.visited[node] = False
 
+    def bipartite_algo_BFS(self,src,color1,color2):
+       self.visited[src] = True
+       color = {}
+       color[src] = color1
+       queue = [src]
+
+
+       while queue:
+         val = queue.pop(0)
+
+         for neighbor in self.graph[val]:
+            if not self.visited[neighbor]:
+              color[neighbor] = color1 if color[val] == color2 else color2
+              self.visited[neighbor] = True
+              queue.append(neighbor)
+            elif color[val] == color[neighbor]:
+              print("Graph is NOT bipartite")
+              return
+  
+       print("Graph Is  bipartite")
+       return
+       
+
              
             
           
@@ -118,15 +141,15 @@ gp.add_gp(6,7)
 
 
 # print(gp.graph)
-# gp.BFS_traverse(0)
-# gp.DFS_traverse(0)
+# gp.traverse_BFS(0)
+# gp.traverse_DFS(0)
 # print(gp.visited)
 # print(gp.cycle_detection(0))
-print(gp.shortest_path_BFS(1,4))
-print(gp.parents)
+# print(gp.shortest_path_BFS(1,4))
+# print(gp.parents)
 gp.reset_parents()
 gp.reset_visited()
-print(gp.parents,gp.visited)
+gp.bipartite_algo_BFS(0,"red","green")
    
 
     
