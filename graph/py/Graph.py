@@ -48,7 +48,7 @@ class Graph:
 
        for neighbor in self.graph[src]:
          if not self.visited[neighbor]:
-           self.DFS_traverse(neighbor)
+           self.traverse_DFS(neighbor)
 
     def cycle_detection(self,src):
         self.visited[src] = True
@@ -122,6 +122,16 @@ class Graph:
   
        print("Graph Is  bipartite")
        return
+    
+    def topology_sorting_DFS(self,src):
+     self.visited[src] = True
+
+     for neighbor in self.graph[src]:
+       if not self.visited[neighbor]:
+         self.topology_sorting_DFS(neighbor)
+
+     self.stack.append(src)
+      
        
 
              
@@ -130,17 +140,17 @@ class Graph:
         
 
 gp = Graph()
-gp.add_gp(0,1)
-gp.add_gp(1,2)
-gp.add_gp(1,7)
-gp.add_gp(2,3)
-gp.add_gp(3,4)
-gp.add_gp(4,5)
-gp.add_gp(5,6)
-gp.add_gp(6,7)
+gp.add_gp(0,1,True)
+gp.add_gp(1,2,True)
+gp.add_gp(1,7,True)
+gp.add_gp(2,3,True)
+gp.add_gp(3,4,True)
+gp.add_gp(4,5,True)
+gp.add_gp(5,6,True)
+gp.add_gp(6,7,True)
 
 
-# print(gp.graph)
+print(gp.graph)
 # gp.traverse_BFS(0)
 # gp.traverse_DFS(0)
 # print(gp.visited)
@@ -149,7 +159,18 @@ gp.add_gp(6,7)
 # print(gp.parents)
 gp.reset_parents()
 gp.reset_visited()
-gp.bipartite_algo_BFS(0,"red","green")
+
+for node in gp.visited:
+  if not gp.visited[node]:
+    gp.topology_sorting_DFS(node)
+
+gp.stack.reverse()
+actual_topology_sorting_path = ">".join(map(str,gp.stack))
+print(actual_topology_sorting_path)
+
+
+ 
+# gp.bipartite_algo_BFS(0,"red","green")
    
 
     
