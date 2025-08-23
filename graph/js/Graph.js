@@ -162,11 +162,13 @@ class Graph {
   topologySortingDFS(src) {
     this.visited[src] = true;
     let arr = this.graph[src];
+    
     for (let i = 0; i < arr.length; i++) {
       if (!this.visited[arr[i]]) {
         this.topologySortingDFS(arr[i]);
       }
     }
+
     this.stack.push(src);
   }
 }

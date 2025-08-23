@@ -41,6 +41,8 @@ class Graph:
           self.visited[neighbor] = True
           queue.append(neighbor)
 
+     self.reset_visited()
+
     def traverse_DFS(self,src):
        
        self.visited[src] = True
@@ -66,6 +68,9 @@ class Graph:
              elif(self.parents[val] != neighbor):
                return "cycle detection"
              
+        self.reset_parents()
+        self.reset_visited()
+             
         return "not found cycle"
     
     def shortest_path_BFS(self,source,destination):
@@ -88,6 +93,9 @@ class Graph:
       path.append(self.parents[path[-1]])
       if source == path[-1]:
         break
+     
+     self.reset_parents()
+     self.reset_visited()
 
      path.reverse()
      actual_path = ">".join(map(str,path))
@@ -119,7 +127,9 @@ class Graph:
             elif color[val] == color[neighbor]:
               print("Graph is NOT bipartite")
               return
-  
+
+       self.reset_visited()
+
        print("Graph Is  bipartite")
        return
     
@@ -151,11 +161,12 @@ gp.add_gp(6,7,True)
 
 
 print(gp.graph)
-# gp.traverse_BFS(0)
+gp.traverse_BFS(0)
 # gp.traverse_DFS(0)
 # print(gp.visited)
-# print(gp.cycle_detection(0))
-# print(gp.shortest_path_BFS(1,4))
+print(gp.cycle_detection(0))
+print(gp.shortest_path_BFS(1,4))
+gp.bipartite_algo_BFS(0,"red","green")
 # print(gp.parents)
 gp.reset_parents()
 gp.reset_visited()
@@ -167,10 +178,13 @@ for node in gp.visited:
 gp.stack.reverse()
 actual_topology_sorting_path = ">".join(map(str,gp.stack))
 print(actual_topology_sorting_path)
-
-
  
-# gp.bipartite_algo_BFS(0,"red","green")
+
+gp.reset_parents()
+gp.reset_visited()
+gp.traverse_DFS(0)
+
+
    
 
     
