@@ -142,12 +142,7 @@ class Graph:
 
      self.stack.append(src)
       
-       
 
-             
-            
-          
-        
 
 gp = Graph()
 gp.add_gp(0,1,True)

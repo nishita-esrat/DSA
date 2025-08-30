@@ -48,7 +48,7 @@ function greedyAlgo(arr, start, end) {
   let count = 0;
 
   for (let index = sortedArr.length - 1; index >= 0; index--) {
-    if (note === 0) return;
+    if (note === 0) break;
     while (note >= sortedArr[index]) {
       note = note - sortedArr[index];
       count++;
