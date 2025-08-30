@@ -1,9 +1,9 @@
-const mem = [];
+const memo = [];
 
 function sum(n,v) {
-  if (mem[n]) {
+  if (memo[n]) {
     console.log({v});
-    return mem[n];
+    return memo[n];
   } else {
     console.log({v});
     let sum = 0;
@@ -12,7 +12,7 @@ function sum(n,v) {
       sum += index;
     }
 
-    mem[n] = sum;
+    memo[n] = sum;
     return sum;
   }
 }
